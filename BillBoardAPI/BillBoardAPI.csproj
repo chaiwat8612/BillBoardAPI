@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\workspace\BillBoardAPI\BillBoardAPI\BillBoardAPI.xml</DocumentationFile>
-    <OutputPath>bin\Debug\netcoreapp2.1\</OutputPath>
+    <DocumentationFile>bin\Debug\netcoreapp2.1\BillBoardAPI.xml</DocumentationFile>
+    <OutputPath></OutputPath>
+    <NoWarn>1701;1702; 1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
