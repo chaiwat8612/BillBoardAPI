@@ -6,5 +6,6 @@ namespace BillBoardAPI.Contexts.Number
     public interface INumberContext
     {
         DbSet<NumberModel> numberModel { get; set; }
+        int NumberSaveChange();
     }
 }

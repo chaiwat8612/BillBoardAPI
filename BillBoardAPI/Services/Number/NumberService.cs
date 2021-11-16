@@ -5,6 +5,7 @@ using System.Linq;
 using BillBoardAPI.Contexts.Number;
 using BillBoardAPI.Models.Number;
 using BillBoardAPI.Services.Configure;
+using BillBoardAPI.Models.Result;
 
 namespace BillBoardAPI.Services.Number
 {
@@ -38,6 +39,50 @@ namespace BillBoardAPI.Services.Number
         private List<NumberModel> GenList(List<NumberModel> numberList)
         {
             return numberList;
+        }
+
+        public ResultModel SaveNewNumber(SaveNewNumberModel saveNewnumberModel)
+        {
+            string errorMessage = "";
+            ResultModel result = new ResultModel();
+
+            NumberModel numberModel = new NumberModel();
+
+            string maxTransactionNumber = GetMaxTransactionNumber();
+
+            numberModel.numberId = maxTransactionNumber;
+            numberModel.status = saveNewnumberModel.status;
+            numberModel.numberValue = saveNewnumberModel.numberValue;
+
+            if (IsSaveNewNumber(numberModel))
+            {
+                result.status = 200;
+                result.message = "Success";
+            }
+            else
+            {
+                ErrorModel errorModel = new ErrorModel
+                {
+                    code = 505,
+                    message = errorMessage,
+                    target = "S3"
+                };
+                result.status = 500;
+                result.message = "Save New Number Fail."; 
+            }
+
+            return result;
+        }
+
+        public bool IsSaveNewNumber(NumberModel numberModel)
+        {
+            this._numberContext.numberModel.Add(numberModel);
+            return this._numberContext.NumberSaveChange() > 0 ? true : false;
+        }
+
+        public string GetMaxTransactionNumber()
+        {
+            return this._numberContext.numberModel.Max(m => m.numberId);
         }
     }
 }

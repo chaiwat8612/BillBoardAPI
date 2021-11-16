@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using BillBoardAPI.Models.Number;
 using BillBoardAPI.Models.Result;
 using BillBoardAPI.Services.Number;
 
@@ -26,6 +27,13 @@ namespace BillBoardAPI.Controllers
                 data = this._numberService.GetNumberListHomepage()
             };
             return Json(numberResult);
+        }
+
+        [HttpPost("SaveNewNumber")]
+        public JsonResult SaveNewNumber([FromBody]SaveNewNumberModel saveNewNumber)
+        {
+            ResultModel resultNewNumberModel = this._numberService.SaveNewNumber(saveNewNumber);
+            return Json(resultNewNumberModel);
         }
     }
 }

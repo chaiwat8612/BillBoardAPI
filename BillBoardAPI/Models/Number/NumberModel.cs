@@ -10,4 +10,10 @@ namespace BillBoardAPI.Models.Number
         public string status { get; set; }
         public int numberValue { get; set; }
     }
+
+    public class SaveNewNumberModel
+    {
+        public string status { get; set; }
+        public int numberValue { get; set; }
+    }
 }

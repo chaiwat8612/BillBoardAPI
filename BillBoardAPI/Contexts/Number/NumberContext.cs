@@ -17,5 +17,10 @@ namespace BillBoardAPI.Contexts.Number
             modelBuilder.Entity<NumberModel>()
                 .HasKey(m => m.numberId);
         }
+
+        public int NumberSaveChange()
+        {
+            return this.SaveChanges();
+        }
     }
 }
