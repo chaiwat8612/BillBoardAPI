@@ -24,7 +24,7 @@ namespace BillBoardAPI.Service.Utility
                     if ((currentYear != maxApplicationNo_Year) || (currentMonth != maxApplicationNo_Month))
                         intGenTransactionNo += 1;
                     else
-                        intGenTransactionNo = Convert.ToInt64(maxApplicationNo_Running);
+                        intGenTransactionNo = Convert.ToInt64(maxApplicationNo_Running) + 1;
                 }
                 else
                     intGenTransactionNo += 1;

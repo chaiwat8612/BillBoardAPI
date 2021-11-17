@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using BillBoardAPI.Contexts.Number;
 using BillBoardAPI.Models.Number;
-using BillBoardAPI.Services.Configure;
 using BillBoardAPI.Models.Result;
+using BillBoardAPI.Services.Configure;
+using BillBoardAPI.Service.Utility;
 
 namespace BillBoardAPI.Services.Number
 {
@@ -14,11 +15,12 @@ namespace BillBoardAPI.Services.Number
         readonly private ConfigureService _config = new ConfigureService();
         readonly private IConfiguration _getConfig;
         readonly private INumberContext _numberContext;
+        readonly private GenTransactionNumberService genTransactionNumberService;
 
         readonly private string _statusInActive = "N";
         readonly private string _bannerImage = ""; 
 
-        public NumberService(INumberContext numberContext)
+        public NumberService(INumberContext numberContext, GenTransactionNumberService genTransactionNumberService = null)
         {
             #region "Get_config"
             _getConfig = _config.GetConfigFromAppsetting();
@@ -26,6 +28,16 @@ namespace BillBoardAPI.Services.Number
             #endregion
 
             this._numberContext = numberContext;
+            
+            if(genTransactionNumberService == null)
+            {
+                this.genTransactionNumberService = new GenTransactionNumberService();
+            }
+            else
+            {
+                this.genTransactionNumberService = genTransactionNumberService;
+            }
+
         }
 
         public List<NumberModel> GetNumberListHomepage()
@@ -50,8 +62,8 @@ namespace BillBoardAPI.Services.Number
 
             string maxTransactionNumber = GetMaxTransactionNumber();
 
-            numberModel.numberId = maxTransactionNumber;
-            numberModel.status = saveNewnumberModel.status;
+            numberModel.numberId = this.genTransactionNumberService.GenTransactionNumber(maxTransactionNumber, DateTime.Now).Trim();
+            numberModel.status = saveNewnumberModel.status.Trim();
             numberModel.numberValue = saveNewnumberModel.numberValue;
 
             if (IsSaveNewNumber(numberModel))
