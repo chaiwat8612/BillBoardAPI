@@ -40,7 +40,7 @@ namespace BillBoardAPI.Services.Number
 
         }
 
-        public List<NumberModel> GetNumberListHomepage()
+        public List<NumberModel> GetNumberList()
         {
             return GenList(this._numberContext.numberModel
                     .Where(m => m.status != _statusInActive)

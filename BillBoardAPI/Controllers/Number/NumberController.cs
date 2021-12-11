@@ -17,14 +17,14 @@ namespace BillBoardAPI.Controllers
             this._numberService = numberService;
         }
 
-        [HttpGet("GetNumberListHomePage")]
-        public JsonResult GetNumberListHomePage()
+        [HttpGet("GetNumberList")]
+        public JsonResult GetNumberList()
         {
             ResultModel numberResult = new ResultModel
             {
                 status = 200,
                 message = "Success",
-                data = this._numberService.GetNumberListHomepage()
+                data = this._numberService.GetNumberList()
             };
             return Json(numberResult);
         }

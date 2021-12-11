@@ -6,7 +6,7 @@ namespace BillBoardAPI.Services.Number
 {
     public interface INumberService
     {
-        List<NumberModel> GetNumberListHomepage();
+        List<NumberModel> GetNumberList();
         ResultModel SaveNewNumber(SaveNewNumberModel saveNewnumberModel);
     }
 }
