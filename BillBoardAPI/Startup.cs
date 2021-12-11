@@ -18,6 +18,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using BillBoardAPI.Contexts.Number;
 using BillBoardAPI.Services.Number;
+using BillBoardAPI.Contexts.Blog;
+using BillBoardAPI.Services.Blog;
 
 namespace BillBoardAPI
 {
@@ -52,6 +54,11 @@ namespace BillBoardAPI
             services.AddDbContext<NumberContext>(option => option.UseSqlServer(_MSSQLConnection));
             services.AddScoped<INumberContext, NumberContext>();
             services.AddScoped<INumberService, NumberService>();
+
+            //Add BlogService
+            services.AddDbContext<BlogContext>(option => option.UseSqlServer(_MSSQLConnection));
+            services.AddScoped<IBlogContext, BlogContext>();
+            services.AddScoped<IBlogService, BlogService>();
 
 
             // Swagger
