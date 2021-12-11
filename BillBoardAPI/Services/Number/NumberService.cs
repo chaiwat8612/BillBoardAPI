@@ -44,7 +44,7 @@ namespace BillBoardAPI.Services.Number
         {
             return GenList(this._numberContext.numberModel
                     .Where(m => m.status != _statusInActive)
-                    .OrderBy(m => m.numberId)
+                    .OrderByDescending(m => m.numberId)
                     .ToList());
         }
 
